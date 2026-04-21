@@ -1,14 +1,26 @@
-import { useState } from "react";
-
+import { useState } from "react"
 
 export default function SearchBar({ onSearch }) {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState("")
+
+    const handleSearch = () => {
+        if (!value.trim()) return
+        onSearch(value)
+        setValue("")
+    }
 
     return (
         <div>
-            // didnt put type=text because there are movies that titles are just numbers
-            <input onChange={(e) => setValue(e.target.value)} onKeyDown={(e) => e.key === "Enter" && onSearch(value)} />
-            <button disabled={!value.trim() ? true : false} onClick={() => onSearch(value)}> Search</button>
+            {/* input has no type since movie titles can be numbers */}
+            <input
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                placeholder="Search for a movie..."
+            />
+            <button disabled={!value.trim()} onClick={handleSearch}>
+                Search
+            </button>
         </div>
     )
 
