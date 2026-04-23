@@ -4,7 +4,10 @@ export default function WatchlistItem({ movie, onRemove, onToggleWatched }) {
             <img
                 src={movie.poster}
                 alt={movie.title}
-                onError={(e) => e.target.src = "/no-poster.png"}
+                onError={(e) => {
+                    e.currentTarget.onerror = null
+                    e.currentTarget.src = "/no-poster.png"
+                }}
             />
             <h3>{movie.title}</h3>
             <p>{movie.year}</p>
