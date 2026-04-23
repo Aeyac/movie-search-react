@@ -4,15 +4,17 @@ export default function SearchBar({ onSearch }) {
     const [value, setValue] = useState("")
 
     const handleSearch = () => {
-        if (!value.trim()) return
-        onSearch(value)
+        const query = value.trim()
+        if (!query) return
+        onSearch(query)
         setValue("")
     }
 
     return (
         <div>
-            {/* input has no type since movie titles can be numbers */}
+            <label htmlFor="movie-search">Search movie title</label>
             <input
+                id="movie-search"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
